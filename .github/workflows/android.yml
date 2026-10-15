@@ -22,7 +22,8 @@ jobs:
       - name: Setup Android SDK
         run: |
           echo "Using preinstalled Android SDK"
-          sdkmanager --version
+          echo "ANDROID_HOME=$ANDROID_HOME"
+          ls "$ANDROID_HOME/cmdline-tools/latest/bin"
 
       - name: Build APK
         run: gradle :app:assembleDebug --no-daemon
