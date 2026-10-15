@@ -1,3 +1,4 @@
+
 name: Build Android APK
 
 on:
@@ -10,18 +11,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/c7heckout@v4
-      - name: Set up Java
+        uses: actions/checkout@v4
+
+      - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
-      -       - name: Set up Android SDK
+
+      - name: Setup Android SDK
         uses: android-actions/setup-android@v3
-      - name: Accept SDK licenses
+
+      - name: Accept licenses
         run: yes | sdkmanager --licenses || true
+
       - name: Build APK
         run: gradle :app:assembleDebug --no-daemon
+
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
